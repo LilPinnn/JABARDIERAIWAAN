@@ -21,11 +21,17 @@
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
+        if ($rows == 1 && $_REQUEST['usergroup']=='admin' ) {
+            $_SESSION['username'] = $username;
+            // Redirect to user dashboard page
+            header("Location: admin.php");
+        }
+        elseif ($rows == 1 && $_REQUEST['usergroup']=='client' ) {
             $_SESSION['username'] = $username;
             // Redirect to user dashboard page
             header("Location: dashboard.php");
-        } else {
+        }
+        else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
@@ -37,7 +43,13 @@
         <h1 class="login-title">Login</h1>
         <input type="text" class="login-input" name="username" placeholder="Username" autofocus="true"/>
         <input type="password" class="login-input" name="password" placeholder="Password"/>
+        <label>User group</label>
+				<select name="usergroup">
+					<option value="admin">Admin</option>
+					<option value="client">Client</option>
+				</select>
         <input type="submit" value="Login" name="submit" class="login-button"/>
+        
         <p class="link">Don't have an account? <a href="registration.php">Registration Now</a></p>
   </form>
   
