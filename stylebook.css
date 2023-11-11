@@ -139,7 +139,7 @@ section .header{
 }
 
 .roomtype{
-    margin-top: 4rem;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
@@ -272,4 +272,12 @@ section .header{
 
 .roomt{
     color: #fff;
+}
+
+.btnshit{
+
+    width: 50%;
+}
+.imagb{
+    width: 50%;
 }
